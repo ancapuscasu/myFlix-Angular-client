@@ -9,14 +9,13 @@ const apiUrl = 'https://ancas-myflixapi.herokuapp.com/';
 @Injectable({
   providedIn: 'root'
 })
-export class UserRegistrationService {
+export class FetchApiDataService {
   /**
    * Inject the HttpClient module to the constructor params.
    * This will provide HttpClient to the entire class, making it available via this.http
    * @param http
    */
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
 
   /** Make api call to the user registration endpoint
@@ -211,8 +210,12 @@ export class UserRegistrationService {
   }
 
 
-// Non-typed response extraction
-private extractResponseData(res: Response): any {
+/**
+ * Non-typed response extraction
+ * @param res {any}
+ * @returns response || empty object
+ */
+private extractResponseData(res: any): any {
   const body = res;
   return body || { };
 }
