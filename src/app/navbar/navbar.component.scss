@@ -1,0 +1,25 @@
+img.logo {
+  width: 100%;
+  max-width: 200px;
+  min-width: 115px;
+  height: auto;
+}
+
+
+  
+  .nav-bar {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+    border-bottom: 1px solid;
+    color: white;
+    background-color: #ffe083;
+    padding: 2rem;
+    padding: 2rem 4vmax;
+  }
+  
+  
+  button {
+    font-size: 20px;
+  }
+  

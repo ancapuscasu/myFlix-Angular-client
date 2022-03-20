@@ -1,0 +1,44 @@
+.movie-card {
+    background-color: #2e2d29;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 15px;
+    padding: 2rem 4rem;
+}
+
+mat-card-actions.mat-card-actions {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.img-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.mat-button {
+    padding: 0;
+}
+
+span.mat-button-wrapper {
+    color: black;
+}
+
+.mat-icon-button {
+    color: red;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+.mat-card {
+    margin: 2rem 1rem;
+    max-width: 280px;
+}
+
+.favourite-icon {
+    align-items: right;
+}
+
