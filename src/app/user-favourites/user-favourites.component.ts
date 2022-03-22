@@ -1,11 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { FetchApiDataService } from '../fetch-api-data.service';
+/** 
+ * The UserFavouritesComponent is used to display the movies saved to a user's FavouriteMovies list. 
+ * The cards display the title, director and an image of the movie and contain buttons that can be opened 
+ * to display dialogs with further information about the director or genre, or a synopsis. Movies can 
+ * be added to or removed from favourites by clicking on a heart icon contained in the top right corner 
+ * of each card. The heart colour toggles accordingly to reflect the movie's status.
+ * 
+ * @module UserFavouritesComponent
+ */
 
-//Material Imports
+import { Component, OnInit } from '@angular/core';
+// Used to access the getUserProfile, getAllMovies, and deleteFavouriteMovie functions created on the service
+import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-//Components
 import { GenreViewComponent } from '../genre-view/genre-view.component';
 import { DirectorViewComponent } from '../director-view/director-view.component';
 import { SynopsisViewComponent } from '../synopsis-view/synopsis-view.component';
@@ -25,15 +32,18 @@ export class UserFavouritesComponent implements OnInit {
     public snackBar: MatSnackBar,
   ) { }
 
+  /**
+   * Calls the getFavouriteMovies and getUserProfile methods as soon as the component loads.
+   */
   ngOnInit(): void {
     this.getUserProfile();
     this.getFavouriteMovies();
   }
 
-   /**
-   * call API endpoint to get user info
+  /**
+   * Function to get user details by making an API call
    * @function getUserProfile
-   * @return users data in json format
+   * @return an object with the user data in json format
    */
 
     getUserProfile(): void {
@@ -47,8 +57,12 @@ export class UserFavouritesComponent implements OnInit {
       }
     }
 
+
   /**
-   * Filters out movies that aren't in favourites list
+   * Function to get a list of all movies from the API, then filter this list to get movies with MovieID that 
+   * matches the MovieIDs in user.FavouriteMovies
+   * @function getFavouriteMovies
+   * @returns an updated favouriteMovies array
    */
    getFavouriteMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((res: any) => {
@@ -61,11 +75,12 @@ export class UserFavouritesComponent implements OnInit {
   }
 
   /**
-   * use API endpoint to remove user favorite
-   * @function deleteFavoriteMovies
-   * @param MovieID {string}
-   * @param title {string}
-   * @returns favorite movies has been updated in json format
+   * Function to remove a certain movie object from the user's FavouriteMovies list using an Api call.
+   * A popup will appear stating that the movie was removed from the user's favourites. Page gets reloaded to update the UI.
+   * @function deleteFavouriteMovies
+   * @param MovieID the id of the movie chosen by the user
+   * @param title the title of the movie chosen by the user
+   * @returns the function getFavouriteMovies() 
    */
    removeFavouriteMovie(MovieID: string, title: string): void {
     this.fetchApiData.deleteFavouriteMovie(MovieID).subscribe((resp: any) => {
@@ -84,11 +99,11 @@ export class UserFavouritesComponent implements OnInit {
   }
 
   /**
-   * Open the director component to view info
-   * @param name 
-   * @param bio 
-   * @param birthdate 
-    */
+   * Open a dialog to display the director component, passing it the data it needs to display inside the data object.
+   * @param name name of the director of the selected movie.
+   * @param bio bio of the director.
+   * @param birthdate birthdate of the director.
+   */
    openDirector(name: string, bio: string, birthdate: Date): void {
     this.dialog.open(DirectorViewComponent, {
       data: {
@@ -102,10 +117,11 @@ export class UserFavouritesComponent implements OnInit {
   }
 
   /**
-   * Open the synopisis component to view info
-   * @param title 
-   * @param imagePath 
-   * @param description 
+   * Opens a dialog to display the synopsis component, passing it the data it needs to display inside the data object.
+   * @function openSynopsis
+   * @param title title of the selected movie.
+   * @param imagePath image path of the selected movie.
+   * @param description description of the selected movie.
    */
    openSynopsis(title: string, imagePath: any, description: string): void {
     this.dialog.open(SynopsisViewComponent, {
@@ -120,9 +136,10 @@ export class UserFavouritesComponent implements OnInit {
   }
 
   /**
-   * Open the genre component to view info
-   * @param name 
-   * @param description 
+   * Opens a dialog to display the genre component, passing it the data it needs to display inside the data object.
+   * @function openGenre
+   * @param name Name of the genre for the selected movie.
+   * @param description Description of the genre.
    */
    openGenre(name: string, description: string): void {
     this.dialog.open(GenreViewComponent, {

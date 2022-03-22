@@ -2,6 +2,8 @@
   <h2 class="my-list-title">My List </h2>
   <p class="my-list-subtitle" *ngIf="(favouriteMovies.length === 0)">There are no movies saved to your list.</p>
 <div class="my-list">
+  <!-- The ngFor directive (*ngFor) is used to loop through the favouriteMovies array in the component. A mat-card is 
+    then rendered for each movie -->
   <mat-card
       *ngFor="let favourite of favouriteMovies; let i = index"
       class="favorite-card"

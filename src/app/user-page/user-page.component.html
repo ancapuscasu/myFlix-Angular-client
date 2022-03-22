@@ -8,6 +8,9 @@
 
     <form class="user-edit-form">
       <mat-form-field>
+        <!-- String interpolation "{{ }}" is used to output data from the class to the template -->
+        <!-- [(ngModel)] directive used to bind the form input values entered by 
+              the user to the userData object in the user-page-component. -->
           <input
             matInput
             [(ngModel)]="userData.FirstName"

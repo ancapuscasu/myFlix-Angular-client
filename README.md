@@ -1,27 +1,36 @@
-# MyFlixAngularClient
+MyFlixAngularClient is a dynamic web application that allows movie enthusiasts to explore movies. It uses the [myFlix API](https://github.com/ancapuscasu/myFlix) and is built using Angular. The project was generated with the [Angular CLI](https://github.com/angular/angular-cli) version 13.2.6 and is written in TypeScript.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.6.
+## Live website
 
-## Development server
+Visit myFlixAngularClient [here](https://ancapuscasu.github.io/myFlix-Angular-client/welcome) and sign up to explore the app!
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Key Features
 
-## Code scaffolding
+- A welcome page invites users to log in or register for the app. 
+- A successful login or registration takes users to the main view where all the movies from the database connected to the API are displayed. Movies are presented as cards that show the movie title, director and image from IMDb.
+- Buttons on the cards allow users to explore further details. By clicking on synopsis, director or genre a dialog pops up to display additional details. 
+- Users can create a collection of favourite movies that they can navigate to from the navigation bar under Profile. Movies are added to or removed from favourites by clicking on a heart icon displayed on each card. 
+- Users can navigate to their account from the navigation bar under Profile. This view is where users can edit their user details or deregister from the application.
+- The application uses Angular Material to provide UI components including the the cards, buttons, inputs, icons, dialogs, and snackbars.
+- myFlixAngularClient interacts with the movies, genres and users databases using the myFlix API. Requests to the API are made using a service module injected into the root component that is configured using Angular's HttpClient class.
+- The completed app has been published to github pages and is accessible via the live website link above.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Technologies
+- Angular
+- Angular Material
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Installation and set up
+This project requires npm in order to install package dependencies. npm is installed automatically when installing node.js. The relevant documentation can be found [here](https://nodejs.org/en/).
+Once npm is installed, install the project dependencies by running: 
+```
+npm install
+```
+Next you need to install the Angular CLI:
+```
+npm install -g @angular/cli
+```
+You will now be able to run CLI commands inside the project. To start the project locally using a dev server run:
+```
+ng serve 
+```
+Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

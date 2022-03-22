@@ -16,7 +16,7 @@
             <button
                 class="movie-details-btn"
                 mat-button
-                (click)='openGenre(movie.Genre.Name, movie.Genre.Description)'
+                (click)='openGenre(movie.Genre[0])'
             >
                 Genre
             </button>

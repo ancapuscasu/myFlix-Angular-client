@@ -1,7 +1,14 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { FetchApiDataService } from '../fetch-api-data.service';
+/** 
+ * The UserLoginFormComponent is used to render a mat dialog containing a form where the
+ * user can submit their credentials to log in to myFlix.
+ * @module UserLoginFormComponent
+ */
 
+import { Component, OnInit, Input } from '@angular/core';
+// Used to navigate the user to the movies route on a successful login
+import { Router } from '@angular/router';
+// Used to access the loginUser function created on this service
+import { FetchApiDataService } from '../fetch-api-data.service';
 // Material Imports
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -14,6 +21,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class UserLoginFormComponent implements OnInit {
 
+  /** 
+   * userCredentials values are populated by form inputs in the user-login-form template that are bound 
+   * using the ngModel directive.
+   */  
   @Input() userCredentials = { 
     Username: '', 
     Password: ''
@@ -29,7 +40,12 @@ export class UserLoginFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // This is the function responsible for sending the form inputs to the backend
+  /**
+   * Invokes the userLogin method on the fetchApiData service, with the userCredentials from the form
+   * in order to log in the user. A successful login closes the form and navigates the user to the
+   * movies route. A popup is displayed confirming login success. If unsuccessful, a popup message
+   * asks the user to check their username and password.
+   */
   loginUser(): void {
     this.fetchApiData.userLogin(this.userCredentials).subscribe((response) => {
       console.log(response);
@@ -43,7 +59,7 @@ export class UserLoginFormComponent implements OnInit {
       });
       this.router.navigate(['movies']);
     }, (response) => {
-        this.snackBar.open(response, 'OK', {
+        this.snackBar.open("Login unsuccessful. Please check your username and password", 'OK', {
           duration: 2000
         });
     });

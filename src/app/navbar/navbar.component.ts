@@ -1,3 +1,10 @@
+/** 
+ * The NavbarComponent is used to display the navbar at the top of the page after the user has logged in. 
+ * The navbar includes links to the different routes of the app: 'movies', 'my-list', 'profile' and 
+ * also a button that allows users to logout.
+ * @module NavbarComponent
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { Router } from '@angular/router';
@@ -18,32 +25,31 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
-
-
-  /**
-   *  * Redirect to welcome screen.
-   */
-      toMovies(): void {
-      this.router.navigate(['movies']);
-    }
   
   /**
-   * Redirect to user profile.
+   * Function to redirect users to movies screen
+   */
+  toMovies(): void {
+    this.router.navigate(['movies']);
+  }
+  
+  /**
+   * Function to redirect users to my-list screen; user favourite movies list
    */
   toMyList(): void {
     this.router.navigate(['my-list']);
   }
 
   /**
-   * Redirect to user profile.
+   * Function to redirect users to profile screen
    */
-   toProfile(): void {
+  toProfile(): void {
     this.router.navigate(['profile']);
   }
 
 
   /**
-   * log out user and clear localstorage. Then redirect to welcome screen.
+   * Function to log out user and clear localStorage, then redirect to welcome screen.
    */
   logOut(): void {
     localStorage.clear();
