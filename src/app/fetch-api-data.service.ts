@@ -244,7 +244,7 @@ private extractResponseData(res: any): any {
 
 /**
  * Handles error responses to Http requests.
- * @param error The HttpErrorReponse returned on the Observable's response stream.
+ * @param error The HttpErrorResponse returned on the Observable's response stream.
  * @returns An observable that errors with the specified message.
  */
 private handleError(error: HttpErrorResponse): any {
