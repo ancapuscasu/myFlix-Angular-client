@@ -16,6 +16,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { GenreViewComponent } from '../genre-view/genre-view.component';
 import { DirectorViewComponent } from '../director-view/director-view.component';
 import { SynopsisViewComponent } from '../synopsis-view/synopsis-view.component';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-user-favourites',
@@ -24,6 +25,7 @@ import { SynopsisViewComponent } from '../synopsis-view/synopsis-view.component'
 })
 export class UserFavouritesComponent implements OnInit {
   user: any = {};
+  genres: any[] = [];
   favouriteMovies: any[] = []; 
 
   constructor(
@@ -37,6 +39,7 @@ export class UserFavouritesComponent implements OnInit {
    */
   ngOnInit(): void {
     this.getUserProfile();
+    this.getGenres();
     this.getFavouriteMovies();
   }
 
@@ -136,12 +139,37 @@ export class UserFavouritesComponent implements OnInit {
   }
 
   /**
+   * Invokes the getGenres method on the fetchApiData service and populates the movies array with the response. 
+   * @function getGenres
+   * @returns an array with all genre objects in json format
+   */
+   getGenres(): void {
+    this.fetchApiData.getGenres().subscribe((resp: any) => {
+        this.genres = resp;
+        console.log(this.genres);
+        return this.genres;
+      });
+  }
+
+  /**
+   * Function to search through genres array and find a match to the MovieID.
    * Opens a dialog to display the genre component, passing it the data it needs to display inside the data object.
    * @function openGenre
-   * @param name Name of the genre for the selected movie.
-   * @param description Description of the genre.
+   * @param id id of the selected movie
    */
-   openGenre(name: string, description: string): void {
+   openGenre(id: string): void {
+    let name;
+    let description;
+    console.log(id);
+
+    for(let i=0; i<this.genres.length; i ++) {
+      console.log(this.genres[i]._id)
+        if (this.genres[i]._id == id) {
+          name = this.genres[i].Name;
+          description = this.genres[i].Description;
+          break;
+        }
+    }
     this.dialog.open(GenreViewComponent, {
       data: {
         Name: name,

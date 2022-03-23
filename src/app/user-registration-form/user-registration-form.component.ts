@@ -61,7 +61,7 @@ export class UserRegistrationFormComponent implements OnInit {
         console.log(response);
         localStorage.setItem('token', response.token);
         localStorage.setItem('UserID', response.user._id);
-        localStorage.setItem('user', response.user);
+        localStorage.setItem('user', JSON.stringify(response.user));
         this.dialogRef.close(); //Closes the modal on success
         this.router.navigate(['movies']); //Routes user to "/movies"
       }, (response) => {

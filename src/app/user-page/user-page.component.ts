@@ -20,7 +20,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-page.component.scss'],
 })
 export class UserPageComponent implements OnInit {
-  user: any = {};
+  userString: any = localStorage.getItem('user');
+  user: any = JSON.parse(this.userString);
 
   @Input() userData = { 
     FirstName: this.user.FirstName,
@@ -28,7 +29,7 @@ export class UserPageComponent implements OnInit {
     Username: this.user.Username, 
     Email: this.user.Email, 
     Password: '', 
-    Birthdate: this.user.Birthdate,
+    Birthdate: this.user.Birthdate
   };
 
   constructor(
@@ -43,6 +44,7 @@ export class UserPageComponent implements OnInit {
    */  
   ngOnInit(): void {
     this.getUserProfile();
+    console.log(this.userData);
   }
 
 
@@ -69,8 +71,9 @@ export class UserPageComponent implements OnInit {
    * @returns an object with the updated user details
    */ 
   editUser(): void {
+    console.log(this.userData);
     this.fetchApiData.editUserProfile(this.userData).subscribe((resp) => {
-      localStorage.setItem('user', resp.user);// update profile in localstorage
+      localStorage.setItem('user', JSON.stringify(resp));// update profile in localstorage
       this.snackBar.open('Your profile was updated successfully!', 'OK', {
         duration: 4000,
       });
